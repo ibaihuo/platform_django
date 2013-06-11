@@ -1,0 +1,51 @@
+{% extends "challenge/chall_base.html" %}
+{% load markup %}
+{% block title %}Challenge Choice{{challenge.id}}{% endblock %}
+
+{% block content %}
+<table>
+  <tr>
+    <td rowspan="4">
+      <form method="post" action=".">{% csrf_token %}
+	{{form.as_p}}
+	<input type='submit' value='提交'>
+      </form>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="4"><h1>题号:{{challenge.id}}</h1></td>
+  </tr>
+
+  <tr>
+    <td>分值:{{challenge.score}}</td>  
+
+    <td><font color="red">类型:{{challenge.c_type}}</font></td>  
+  </tr>
+
+  <tr>
+    <td>题目:{{challenge.title|markdown}}</td>  
+  </tr>
+
+  <tr>
+    <td>选项:{{challenge.content|markdown}}</td>  
+  </tr>
+
+{%ifequal message "submited" %}
+<h1>你们团队已经提交过本题了。</h1>
+{%else%}
+{%ifequal message "right"%}
+<h1>
+  <font color="red">答案正确！恭喜！你完成本题。</font>
+</h1>
+{%else%}
+{%ifequal message "wrong"%}
+<h1>
+  <font color="green">答案不正确! 把握好下一题吧！</font>
+</h1>
+{%endifequal%}
+{%endifequal%}
+{%endifequal%}
+</table>
+
+{% endblock %}

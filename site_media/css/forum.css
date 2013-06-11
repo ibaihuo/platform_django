@@ -1,0 +1,66 @@
+#ForumBody {
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#ForumList,
+#ForumThreadList,
+#ForumThreadPosts {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#ForumList td,
+#ForumThreadList td,
+#ForumThreadPosts td {
+    border: solid #777 1px;
+    padding: 6px;
+}
+
+#ForumList .ForumListDetails {
+    width: 70%;
+}
+
+#ForumList .ForumListDetails strong {
+    font-size: 120%;
+}
+
+#ForumList .ForumListDetails .ForumStats {
+    font-size: 80%;
+}
+
+.ForumListLastPost,
+.ForumThreadLastPost {
+    border-bottom: solid #777 1px;
+}
+
+#ForumList th,
+#ForumThreadList th,
+#ForumThreadPosts th {
+    border: solid #777 1px;
+    text-align: left;
+    padding: 4px;
+}
+
+#ForumThreadPosts th {
+    width: 20%;
+}
+
+#ForumBreadcrumbs {
+    padding: 20px;
+}
+
+#ForumBody label {
+    font-size: 110%;
+    font-weight: bold;
+    display: block;
+    padding: 4px;
+}
+
+#ForumThreadPostDetail {
+    width: 20%;
+}
+.ForumPagination {
+    display: inline;
+}

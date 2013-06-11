@@ -1,0 +1,118 @@
+{%extends "challenge/chall_base.html"%}
+{%block title%}Detail Challenge{%endblock%}
+{%block content%}
+
+
+<h4>人物详细</h4>
+
+<br />
+
+<div style="width: 100%; text-align: left">
+  <div style="width: 30%; float: left;">
+    <img src="/site_media/{{challenge.person.pic}}"  width="220" height="300">
+  </div>
+  <div style="width: 70%; float: right;">
+    <table class="listing">
+      <tr>
+	<td>人物名字</td>
+	<td>{{challenge.person.name}}</td>
+      </tr>
+
+      <tr>
+	<td>等级</td>
+	<td>{{challenge.person.grade}}</td>
+      </tr>
+
+      <tr>
+	<td>挑战前提</td>
+	{% if challenge.prev %}
+	<td><a href="{{challenge.prev.get_absolute_url}}">{{challenge.prev}}</td>
+	{%else%}
+	<td>无</td>
+	{%endif%}
+      </tr>
+      
+      <tr>
+	<td>人品</td>
+	<td>{{challenge.person.rp}}</td>
+      </tr>
+
+      <tr>
+	<td>特长</td>
+	<td>{{challenge.person.advantages}}</td>
+      </tr>
+
+      <tr>
+	<td width="20%">人物简介</td>
+	<td width="100%">{{challenge.person.brief}}</td>
+      </tr>
+    </table>
+  </div>
+  <div style="width: 70%; float: right;">
+    <table class="listing">
+      <tr>
+	<td>奖品名称</td>
+	<td>{{challenge.trophy.name}}</td>
+      </tr>
+
+      <tr>
+	<td>等级</td>
+	<td>{{challenge.trophy.grade}}</td>
+      </tr>
+
+      <tr>
+	<td>类别</td>
+	<td>{{challenge.trophy.classify}}</td>
+      </tr>
+
+      <tr>
+	<td>简介</td>
+	<td>{{challenge.trophy.brief}}</td>
+      </tr>
+
+      <tr>
+	<td>图片</td>
+	<td>
+	  <img src="/site_media/{{challenge.trophy.pic}}"  width="80" height="80">
+	</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<br />
+<br />
+<h4>题目详细</h4>
+<br />
+<table>
+  <tr><td>出题人:{{ challenge.author }}</td>
+  <tr>
+    <td>分值:{{ challenge.score }}</td>
+  </tr>
+
+  <tr>
+    <td>出题时间: {{ challenge.datetime }}</td>
+  </tr>
+  
+  <tr>
+    <td>题目描述:{{ challenge.description }}</td>
+  </tr>
+
+  {% if prev_passed %}
+  <tr>
+    <td><a href="{{challenge.url}}" target="_BLANK">Click Here To Challenge</a></td></tr>
+  <tr>
+    <td><a href="submit">Submit Your KEY</a></td>
+  </tr>
+  {% else %}
+  <tr>
+    <td>请先挑战: <a href="{{challenge.prev.get_absolute_url}}">{{challenge.prev}}</td>
+  </tr>
+  {%endif%}
+
+</table>
+<br>
+<a href="/challenge/">返回题目列表</a>
+<hr>
+{%endblock%}

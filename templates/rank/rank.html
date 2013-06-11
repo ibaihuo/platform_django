@@ -1,0 +1,79 @@
+{% extends "rank/rank_base.html" %}
+{% load team_tags %}
+
+{% block title %}排名{% endblock %}
+
+{% block content %}
+{% if page.object_list %}
+<h4>当前排名</h4>
+<br />
+<table class="listing">
+  <tr>
+    <th>排名</th>
+    <th>登录名</th>
+    <th>团队名</th>
+    <th>积分</th>
+    <th>完成题目</th>
+    <th>大学</th>
+    <th>专业</th>
+    <th>最后提交</th>
+    <th>注册时间</th>
+  </tr>
+
+  {% for profile in page.object_list %}
+  {% ifequal profile.user.user.username request.user.username%}
+  <tr class="myself">
+    {%else%}
+  <tr class="{% cycle 'odd' 'even' %}">
+    {%endifequal%}
+    <td>
+      {{profile.get_current_rank|rank_name}}
+    </td>
+
+    <td>
+      {{ profile.user.username }}
+    </td>
+
+    <td>
+      {{ profile.team_name }}
+    </td>
+
+    <td>
+      {{ profile.rank }}分
+    </td>
+
+    <td>
+      {{ profile.finished_count }}个
+    </td>
+
+    <td>
+      {{ profile.university }}
+    </td>
+
+    <td>
+      {{ profile.college }}
+    </td>
+
+    <td>
+      {%if profile.last_submit%}
+      {{ profile.last_submit }}
+      {%else%}
+      尚未提交
+      {%endif%}
+    </td>
+
+    <td>
+      {{ profile.user.date_joined }}
+    </td>
+    {% endfor %}
+  <tr>
+    <td colspan="9">{% include "paginator/paginator.html" %}</td>
+  </tr>
+</table>
+{% else %}
+当前没有团队信息。
+{% endif %}
+<br />
+<br />
+<h4><a href="/rank/report/">报告下载</a></h4>
+{% endblock %}

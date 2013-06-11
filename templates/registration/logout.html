@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title%}logout{%endblock%}
+
+{% block tabs %} 
+<a href="/" class="plain">Home</a>
+<a href="/rank/" class="plain">Rank</a>
+<a href="/challenge/" class="plain">Challenge</a> 
+<a href="/forum/" class="plain">Forum</a>
+<a href="/about/" class="plain">About</a>
+<a href="/accounts/login/" class="selected">Logout</a>
+{% endblock%}
+
+
+{% block content %}
+<center>
+<h3>
+You have successful logged out.
+<a href='/'>To Home</a>
+or
+<a href='/accounts/login/'>Login</a> Again Is Your Choice!.
+</h3>
+</center>
+{% endblock %}

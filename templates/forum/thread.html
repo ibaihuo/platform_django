@@ -1,0 +1,51 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}
+{{ thread.title|escape }} ({{ forum.title }})
+{% endblock %}
+
+{% block navigator %}
+位置:  <a href='/forum'>Forum</a>
+{% for title, url in thread.forum.get_url_name %}
+&raquo; <a href='{{ url }}'>{{ title }}</a>
+{% endfor %}
+&raquo; <a href='{{ thread.get_absolute_url }}'>{{ thread.title|escape }}</a> ({{ thread.posts }}回复)
+{% endblock %}
+
+{% block content %}
+
+<table id='ForumThreadPosts'>
+  {% for post in post_list %}
+  <tr>
+    <td class='ForumThreadPostDetail' id='post{{ post.id }}' width="15%">
+      {% with post.time|timesince as time %}
+      {{ time }} ago
+      {% endwith %}<br />
+      <strong>团队:{{ post.author }}</strong><br />
+      排名:{{post.author.get_profile.get_current_rank}}
+      得分:{{post.author.get_profile.rank}}<br />
+    </td>
+    <td width="80%">{{ post.body_html|safe|linebreaks }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if is_paginated %}
+{% include "paginator/paginator.html" %}
+{% endif %}
+
+<h2>参与讨论</h2>
+{% if thread.closed %}
+<p>对不起，访帖已经关闭，不能再回复了。</p>
+{% else %}
+<form method='post' action='reply/'>{% csrf_token %}
+  <p>
+    <label>当前身份： </label>
+    <span>{{ user.username }}</span>
+  </p>
+  {{ form.as_p }}
+  <input type='submit' value="提交" />
+</form>
+{% endif %}
+
+{% endblock %}

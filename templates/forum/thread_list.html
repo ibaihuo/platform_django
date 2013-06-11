@@ -1,0 +1,76 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}{{ forum.title }}{% endblock %}
+
+{% block navigator %}
+位置:  <a href='/forum'>Forum</a>
+{% for title, url in forum.get_url_name %} &raquo; <a href='{{ url }}'>{{ title }}</a>
+{% endfor %}
+({{ forum.threads }} 帖子, {{ forum.posts }} 回复)
+{% endblock %}
+
+
+{% block content %}
+
+{% if child_forums %}
+<table id='ForumList'>
+  <tr>
+    <th>子版块</th>
+    <th>最后更新</th>
+  </tr>
+
+  {% for forum in child_forums %}
+  {% include "forum/forum_part.html" %}
+  {% endfor %}
+</table>
+<br />
+{% endif %}
+
+<table id='ForumThreadList'>
+  <tr>
+    <th>帖子</th>
+    <th style='width: 50px;'>回复</th>
+    <th style='width: 50px;'>查看</th>
+    <th style='width: 220px;'>最后发表</th>
+  </tr>
+
+  {% for t in thread_list %}
+  <tr>
+    <td>{% if t.sticky %}[置顶]{% endif %}
+      <a href='{{ t.get_absolute_url }}'>{{ t.title|escape }}</a>{% if t.closed %} (关闭){% endif %}</td>
+    <td style='width: 50px;'>{{ t.posts }}</td>
+    <td style='width: 50px;'>{{ t.views }}</td>
+    {% with t.thread_latest_post as latest_post %}
+    <td style='width: 220px;' class='ForumThreadLastPost'>
+      {{ latest_post.time|timesince }} ago by {{ latest_post.author }}
+      (<a href='{{ latest_post.get_absolute_url }}'>点击查看</a>)
+    </td>
+    {% endwith %}
+  </tr>
+{%empty%}
+<tr>
+  <td colspan="4">这里还没有帖子哦!你来发表第一篇帖子吧！</td>
+</tr>
+  {% endfor %}
+</table>
+
+
+{% if is_paginated %}
+{% include "paginator/paginator.html" %}
+{% endif %}
+
+<h2>发新话题</h2>
+{% if user.is_authenticated %}
+<form method='post' action='new/'>{% csrf_token %}
+  <p>
+    <label>当前身份：</label>
+    <span>{{ user.username }}</span>
+  </p>
+  {{ form.as_p }}
+  <p><input type='submit' value="发布"/></p>
+</form>
+{% else %}
+<p>登录后你就可以发话题！</p>
+{% endif %}
+
+{% endblock %}

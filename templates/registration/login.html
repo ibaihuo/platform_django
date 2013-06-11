@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title%}Login{%endblock%}
+
+{% block tabs %} 
+<a href="/" class="plain">Home</a>
+<a href="/rank/" class="plain">Rank</a>
+<a href="/challenge/" class="plain">Challenge</a> 
+<a href="/forum/" class="plain">Forum</a>
+<a href="/about/" class="plain">About</a>
+<a href="/accounts/login/" class="selected">Login</a>
+{% endblock%}
+
+
+{% block content %}
+<h4>Login</h4>
+<br />
+{% if form.errors %}
+<p class="error">Sorry, that's not a valid username or password</p>
+{% endif %}
+
+<form action="" method="post">{% csrf_token %}
+  <label for="username">Login ID:</label>
+  <input type="text" name="username" value="" id="username">
+  <br>
+<br>
+  <label for="password">Password:</label>
+  <input type="password" name="password" value="" id="password">
+<br><br>
+  <input type="submit" value="Login" />
+  <input type="hidden" name="next" value="{{ next|escape }}" />
+</form>
+
+<br />
+<br />
+If you haven't an account, Please <a href="/accounts/register/">Register</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}
+新发帖-{{ title }}
+{% endblock %}
+
+{% block navigator %}
+位置:  <a href='/forum'>Forum</a>
+{% for title, url in forum.get_url_name %}
+&raquo; <a href='{{ url }}'>{{ title }}</a>
+{% endfor %} &raquo; 新发帖
+{% endblock %}
+
+
+{% block content %}
+
+<h2>发新话题</h2>
+<form method='post' action='./'>{% csrf_token %}
+  <p>
+    <label>当前身份：</label>
+    <span>{{ user.username }}</span>
+  </p>
+  {{ form.as_p }}
+  <p><input type='submit' value="发布"/></p>
+</form>
+
+{% endblock %}

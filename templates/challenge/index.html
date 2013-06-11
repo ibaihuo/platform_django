@@ -1,0 +1,53 @@
+{% extends "challenge/chall_base.html" %}
+{% load team_tags %}
+
+{% block title %}Challenge{% endblock %}
+
+{% block content %}
+
+{%if has_choice %}
+<h4><a href="/challenge/choice/">基础选择题</a></h4>
+{%endif%}
+
+<br />
+<h4>挑战题目</h4>
+<br />
+{% include "paginator/paginator.html" %}
+<br />
+<div style="width: 100%;">
+  {% for challenge in page.object_list %}
+  <div style="width: 50%; float: left;">
+    <table class="listing">
+      <tr>
+	<td>
+	  <a href="{{challenge.id}}">
+	    <img src="/site_media/{{challenge.person.pic}}" height="130" width="110">
+	  </a>
+	</td>
+	<td>
+	  <ul>
+	    <li>人物名字:{{challenge.person.name}}</li>
+	    <li>人品:{{challenge.person.rp}}</li>
+	    <li>挑战难度:{{challenge.person.grade}}</li> 
+	    <li>奖品:{{challenge.trophy}}</li> 
+	    <li>分值:{{challenge.score}}</li>  
+	    <li>状态:
+	      {% if challenge.id|stringformat:'s' in cur_fin_chall %}
+	      <font color="red">成功</font>
+	      {%else%}
+	      <font color="green">失败</font>
+	      {%endif%}
+	    </li>
+	  </ul>
+	</td>
+      </tr>
+    </table>
+  </div>
+  {% empty %}
+  对不起，管理员还没有添加题目。<br>
+  请等待！
+  {% endfor %}
+</div>
+
+
+{% endblock %}

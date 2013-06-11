@@ -1,0 +1,3 @@
+{% load team_tags %}`排名`,`登录名`,`团队名`,`积分`,`完成题目`,`大学`,`专业`,`最后提交`,`注册时间`
+{% for profile in profiles %}`{{profile.get_current_rank|rank_name}}`,`{{ profile.user.username }}`,`{{ profile.team_name }}`,`{{ profile.rank }}`,`{{ profile.finished_count }}`,`{{ profile.university }}`,`{{ profile.college }}`,{%if profile.last_submit%}`{{ profile.last_submit }}`{%else%}`尚未提交`{%endif%},`{{ profile.user.date_joined }}`
+{% endfor %}

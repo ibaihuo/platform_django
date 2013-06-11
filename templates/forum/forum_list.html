@@ -1,0 +1,20 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}Forum{% endblock %}
+
+{% block navigator %}
+位置:  <a href='/forum'>Forum</a>
+{% endblock %}
+
+{% block content %}
+<table id='ForumList'>
+  <tr>
+    <th>所有版块</th>
+    <th>最后发表</th>
+  </tr>
+
+  {% for forum in object_list %}
+  {% include "forum/forum_part.html" %}
+  {% endfor %}
+</table>
+{% endblock %}

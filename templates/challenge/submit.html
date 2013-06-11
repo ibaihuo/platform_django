@@ -1,0 +1,31 @@
+{%extends "challenge/chall_base.html"%}
+{%block title%}Submit Answer{%endblock%}
+{%block content%}
+
+{%ifequal message_level "right"%}
+<h1>
+  <font color="red">答案正确！恭喜！你完成本题。</font>
+</h1>
+{%else%}
+{%ifequal message_level "submit" %}
+<h1>请输入答案</h1>
+{%else%}
+{%ifequal message_level "submited" %}
+<h1>答案正确，不过你们团队已经提交过了。</h1>
+{%else%}
+<h1>
+  <font color="green">答案不正确，请再试手气！</font>
+</h1>
+{%endifequal%}
+{%endifequal%}
+{%endifequal%}
+<form method="post" action=".">{% csrf_token %}
+  {{form.as_p}}
+  <input type='submit' value='手气不错'>
+</form>
+<br>
+<br>
+<br>
+<a href="{{challenge.get_absolute_url}}">返回题目</a>
+<hr>
+{%endblock%}

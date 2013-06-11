@@ -1,0 +1,121 @@
+{% extends "profile/profile_base.html" %}
+
+{% block title %}Your Team Profile{% endblock %}
+
+{% block content %}
+
+<h4>团队资料</h4>
+<br />
+<div style="width: 100%; text-align: left">
+  <div style="width: 70%; float: left;">
+    <table width="" cellspacing="" cellpadding="" border="0">
+      <tr>
+	<td>当前名次</td>
+	<td class="rank">第{{profile.get_current_rank}}名</td>
+      </tr>
+
+      <tr>
+	<td>当前积分</td>
+	<td>{{profile.rank}}分</td>
+      </tr>
+
+      <tr>
+	<td>登录名</td>
+	<td>{{ profile.user.username }}  </td>
+      </tr>
+
+      <tr>
+	<td>注册邮箱</td>
+	<td>{{profile.user.email}}  </td>
+      </tr>
+
+      <tr>
+	<td>团队名称</td>
+	<td>{{profile.team_name}}</td>
+      </tr>
+
+      <tr>
+	<td>队长姓名</td>
+	<td>{{profile.leader_name}}</td>
+
+	<td>队长学号</td>
+	<td>{{profile.leader_sn}}</td>
+
+	<td>队长手机</td>
+	<td>{{profile.leader_phone}}</td>
+      </tr>
+
+      <tr>
+	<td>队员1姓名</td>
+	<td>{{profile.mem1_name}}</td>
+	<td> 队员1学号</td>
+	<td>{{profile.mem1_sn}}</td>
+      </tr>
+
+      <tr>
+	<td>队员2姓名</td>
+	<td>{{profile.mem2_name}}</td>
+	<td>队员2学号</td>
+	<td>{{profile.mem2_sn}}</td>
+      </tr>
+
+      <tr>
+	<td>队员3姓名</td>
+	<td>{{profile.mem3_name}}</td>
+	<td>队员3学号</td>
+	<td>{{profile.mem3_sn}}</td>
+      </tr>
+
+      <tr>
+	<td>来自学校</td>
+	<td>{{profile.university}}</td>
+      </tr>
+
+      <tr>
+	<td>学院</td>
+	<td>{{profile.college}}</td>
+      </tr>
+
+    </table>
+  </div>
+
+  <div style="width: 30%; float: left;">
+    <a href="/accounts/profile/edit/">Edit Profile</a>
+    <br />
+    <a href="/accounts/password/change/">Change Password</a>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<h4>答题日志：</h4>
+<table>
+  <tr>
+    <th>题号</th>
+    <th>类型</th>
+    <th>得分</th>
+    <th>提交时间</th>
+    <th>IP</th>
+  </tr>
+  {%for log in logs%}
+  <tr>
+    <td>{{log.challenge_id}}</td>
+    <td>{{log.challenge_type}}</td>
+    <td>{{log.score}}分</td>
+    <td>{{log.time}}</td>
+    <td>{{log.ip}}</td>
+  </tr>
+  {%empty%}
+  <tr>
+    <td colspan="4"><font color="red">当前还没有成功的提交过答案！加油哦，Test and Test Again!!!</font></td>
+  </tr>
+  {%endfor%}
+</table>
+
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

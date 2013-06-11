@@ -1,0 +1,37 @@
+{% extends "home/home_base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<table>
+  {% if page.object_list %}
+  <tr>
+    <td colspan="4"><h4>新闻列表</h4>
+  </tr>
+  <tr>
+    <td><br /></td>
+  </tr>
+  {% for notice in page.object_list %}
+  <tr>
+    <td nowrap>[{{notice.classify}}]</td>
+    <td width="100%"><a href="/notice/{{notice.id}}" />{{notice.title|slice:":30"}}...</td>
+    <td nowrap>更新:{{notice.update_date}}</td>
+    <td nowrap alight="right">发布人:{{notice.author}}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <td><br /></td>
+  </tr>
+
+  <tr>
+    <td colspan="4">
+      {% include "paginator/paginator.html" %}</td>
+  </tr>
+
+  {% else %}
+  当前没有新闻。
+  {% endif %}
+</table> 
+
+{% endblock %}

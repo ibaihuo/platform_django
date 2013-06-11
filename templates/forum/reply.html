@@ -1,0 +1,31 @@
+{% extends "forum/forum_base.html" %}
+
+{% block title %}
+回复帖子"{{ thread.title }}"
+{% endblock %}
+
+{% block navigator %}
+位置:  <a href='/forum'>Forum</a>
+{% for title, url in thread.forum.get_url_name %}
+&raquo; <a href='{{ url }}'>{{ title }}</a>
+{% endfor %} &raquo; <a href='{{ thread.get_absolute_url }}'>{{ thread.title|escape }}</a> &raquo; 回复
+{% endblock %}
+
+
+{% block content %}
+
+<h2>参与讨论</h2>
+{% if thread.closed %}
+<p>对不起，访帖已经关闭，不能再回复了。</p>
+{% else %}
+<form method='post' action='./'>{% csrf_token %}
+  <p>
+    <label>当前身份： </label>
+    <span>{{ user.username }}</span>
+  </p>
+  {{ form.as_p }}
+  <input type='submit' value="提交" />
+</form>
+{% endif %}
+
+{% endblock %}

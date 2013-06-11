@@ -1,0 +1,42 @@
+{% ifnotequal paginator.num_pages 1 %}
+<div style="clear: both;"></div>
+<div class="paginator">
+  {% ifnotequal page_current "1" %}
+  <a href="?page=1">&laquo;</a>
+  {% else %}
+  <p>&laquo;</p>
+  {% endifnotequal %}
+  
+  {% if page.has_previous %}
+  <a href="?page={{ page.previous_page_number }}">&lsaquo;</a>
+  {% else %}
+  <p>&lsaquo;</p>
+  {% endif %}
+  
+  <div style="width: 5px; float: left;">&nbsp;</div>
+
+  {% for p in page_range %}
+  {% ifequal p page_current %}
+  <p class="selected">{{ p }}</p>
+  {% else %}
+  <a href="?page={{ p }}">{{ p }}</a>
+  {% endifequal %}
+  {% endfor %}
+  
+  <div style="width: 5px; float: left;">&nbsp;</div>
+  
+  {% if page.has_next %}
+  <a href="?page={{ page.next_page_number }}">&rsaquo;</a>
+  {% else %}
+  <p>&rsaquo;</p>
+  {% endif %}
+  
+  {% ifnotequal page_current paginator.num_pages %}
+  <a href="?page={{ paginator.num_pages }}">&raquo;</a>
+  {% else %}
+  <p>&raquo;</p>
+  {% endifnotequal %}
+  
+</div>
+<div style="clear: both;"></div>
+{% endifnotequal %}

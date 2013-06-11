@@ -1,0 +1,25 @@
+<tr>
+  <td class='ForumListDetails'>
+    <p><strong>
+	<a href='{{ forum.get_absolute_url }}'>{{ forum.title }}</a>
+      </strong>
+
+      <br />
+      <span class='ForumStats'>
+	{{ forum.threads }} 帖子, {{ forum.posts }}回复
+      </span>
+    </p>
+
+    <p>{{ forum.description }}</p></td>
+
+  <td class='ForumListLastPost'>
+    {% with forum.forum_latest_post as latest_post %}
+    {% if latest_post %}
+    {{ latest_post.time|timesince }} ago by {{ latest_post.author }}:
+    (<a href='{{ latest_post.get_absolute_url }}'>点击查看</a>)
+    {% else %}
+    暂无帖子
+    {% endif %}
+    {% endwith %}
+  </td>
+</tr>

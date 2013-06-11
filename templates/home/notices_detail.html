@@ -1,0 +1,46 @@
+{%extends "home/home_base.html"  %}
+{% load markup %}
+{%block title %}Notice Detail{%endblock%}
+
+{%block content%}
+
+<table>
+  <tr>
+    <td colspan="4"><h1>{{notice.title}}</h1></td>
+  </tr>
+
+  <tr>
+    <td>发布人: {{notice.author}}</td>    
+    <td>更新日期: {{notice.update_date}}</td>    
+    <td>发布日期: {{notice.pub_date}}</td>    
+  </tr>
+
+  <tr>
+    <td>
+      <p>
+	{{notice.content|markdown}}
+      </p>
+    </td>
+  </tr>
+</table>
+<br />
+
+<table align="center">
+  <tr>
+    <td>
+      {% if notice.get_prev%}
+      <a href="/notice/{{notice.get_prev}}">前一条</a>
+      {% endif %}
+    </td>
+    <td><a href="/">返回列表</a></td>
+    <td>
+      {% if notice.get_next%}
+      <a href="/notice/{{notice.get_next}}">下一条</a>
+      {% endif %}
+    </td>
+
+  </tr>
+
+</table>
+
+{%endblock%}

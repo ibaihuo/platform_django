@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html> 
+  <head> 
+    <title>H4cKP14tf0Rm-{% block title %}{% endblock %}</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8"></meta>
+    <link rel="stylesheet" media="screen" type="text/css" href="/site_media/css/hack.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/site_media/css/forum.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/site_media/css/paginator.css" />
+  </head> 
+  
+  <body bgcolor="#FFFFFF" text="#000000"> 
+    <div class="top"> 
+      <img src="/site_media/images/logo.jpg" border="0" width="600" height="111" alt="hacking logo"> </img>
+    </div> 
+
+    <div class="tabs">
+      {% block tabs %} {% endblock%}
+    </div> 
+
+    <div class="personalBar"> 
+      {% if not user.is_authenticated %}
+      <a href="/accounts/register/">Register</a>&nbsp;
+      <a href="/accounts/login/">Login</a>&nbsp;
+      {% else %}
+      Hi,<font color='red'>{{ user.username }} </font> Welcome To Hacking Platform.&nbsp;
+      <a href="/accounts/profile/">Profile</a>&nbsp;
+      <a href="/accounts/logout/">Logout</a>&nbsp;
+      {% endif %}
+    </div> 
+
+    <table class="columns"> 
+      <tr> 
+	<td class="left"> 
+	  <div class="box"> 
+	    <h5>You Kn0w?</h5> 
+	    <div class="body"> 
+	      <div class="content odd">
+		<img src='/site_media/images/golden.gif' border='0'></img>The more you educate yourself the more you understand where things come from the more obvious things become and you begin to see lies everywhere. You have to know the truth and seek the truth and the truth will set you free." -- zeitgeist addendum"
+	      </div> 
+	    </div>
+	  </div> 
+	</td>
+	
+	<td class="main">
+	  {% block navigator %} {% endblock %}
+	  {% block content %}{% endblock %}
+	</td>
+
+	<td class="right">
+	  <div class="box">
+	    <h5>&nbsp;友情链接&nbsp;</h5> 
+	    <div class="body">
+	      <div class="content odd"> 
+		<img src='/site_media/images/friend.gif'></img> <a href='http://www.cuit.edu.cn' target="_BLANK">学院</a><br />
+		<img src='/site_media/images/friend.gif'></img> <a href='http://tech.cuit.edu.cn' target="_BLANK">技术网</a><br />
+		<img src='/site_media/images/friend.gif'></img> <a href='http://www.myclover.org' target="_BLANK">三叶草小组</a><br />
+		<img src='/site_media/images/friend.gif'></img> <a href='http://linux.cuit.edu.cn' target="_BLANK">桃源</a><br />
+	      </div> 
+	    </div> 
+	  </div> 
+	</td>
+      </tr> 
+    </table> 
+    <div class="footer"> 
+      Designed by <a href="http://hi.baidu.com/renewjoy" target="_BLANK">Joy@[S.Y.C]</a>
+    </div>
+  </body> 
+</html>

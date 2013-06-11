@@ -1,0 +1,31 @@
+{% extends "profile/profile_base.html" %}
+
+{% block title %}Create Your Team Profile{% endblock %}
+
+{% block content %}
+<table border="0">
+  <tr>
+    <td colspan="4"><h4>创建资料</h4></td>
+  </tr>
+
+  <tr>
+     <td colspan="4">
+       <p>
+	 恭喜！你已经为你的团队注册了一个用于答题的登录账号。<br>
+	 请创建你们团队的资料。<br />
+	 当你提交信息过后，经过管理员人审核，确认信息有效之后，管理员会手动为你的账号激活。<br />
+	 只有激活了的用户才能登录答题。<br />
+         请你记住前面注册的登录名和当前的地址，当你的账号一直无法被激活的时候，你可以来这儿重新修改交提交你团队的信息。</p>
+     </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <form action="" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="创建">
+      </form>
+    </td>
+  </tr>
+</table>
+{% endblock %}

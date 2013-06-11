@@ -1,0 +1,42 @@
+{% extends "challenge/chall_base.html" %}
+{% load markup %}
+{% block title %}Challenge Choice{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <td colspan="6"><h4>选择题列表</h4>
+  </tr>
+  <tr>
+    <td><br /></td>
+  </tr>
+  {% for choice in page.object_list %}
+  <tr>
+    <td nowrap>[题号:{{choice.id}}]</td>
+    <td nowrap>[分值:{{choice.score}}]</td>
+    <td nowrap>[{{choice.c_type}}]</td>
+    <td nowrap width="100%"><a href="/challenge/choice/{{choice.id}}" />{{choice.title|slice:":30"}}...</td>
+    <td nowrap aligh="right">状态:
+      {% if choice.id|stringformat:'s' in cur_fin_chall %}
+      <font color="red">已答</font>
+      {%else%}
+      <font color="green">未答</font>
+      {%endif%}
+    </td>
+    <td nowrap aligh="right">日期:{{choice.datetime}}</td>
+  </tr>
+  {% empty %}
+  没有添加选择题。
+  {% endfor %}
+  <tr>
+    <td><br /></td>
+  </tr>
+
+  <tr>
+    <td colspan="6">
+      {% include "paginator/paginator.html" %}</td>
+  </tr>
+</table>
+
+{% endblock %}
